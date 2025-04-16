@@ -1,0 +1,47 @@
+## 🧠 System Architecture
+
+1. **Car Simulation** in Proteus
+2. **PIR Sensors** detect car presence
+3. Arduino reads sensor data through analog pins
+4. Output is printed on serial monitor to indicate:
+   - Whether a car has arrived at a particular slot
+
+## 🔧 How It Works
+
+- The system uses **three PIR sensors** to detect whether cars are present in **three distinct slots**.
+- Data from the sensors is read via analog pins A0, A1, and A2.
+- Sensor values are mapped and compared to threshold values.
+- Based on the result, serial messages like `car1 is arrived`, `car2 is arrived`, etc., are printed.
+
+## 🧪 Sample Arduino Code
+
+```cpp
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int a = analogRead(A0);
+  int b = map(a, 0, 1023, 0, 255);
+  Serial.println(b);
+  if (b > 240 || b < 240) {
+    Serial.println("car1 is arrived");
+    delay(500);
+  }
+
+  int a1 = analogRead(A1);
+  int b1 = map(a1, 0, 1023, 0, 255);
+  Serial.println(b1);
+  if (b1 > 240 || b1 < 240) {
+    Serial.println("car2 is arrived");
+    delay(500);
+  }
+
+  int a2 = analogRead(A2);
+  int b2 = map(a2, 0, 1023, 0, 255);
+  Serial.println(b2);
+  if (b2 > 240 || b2 < 240) {
+    Serial.println("car3 is arrived");
+    delay(500);
+  }
+}
